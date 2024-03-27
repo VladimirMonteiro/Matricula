@@ -9,7 +9,8 @@ const StudentSchema = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     course: {type: String, required: true},
-    registration: {type: Array}
+    disciplines: {type: Array},
+    isStudent: {type: Boolean, default: true}
 }, {timestamps: true})
 
 
