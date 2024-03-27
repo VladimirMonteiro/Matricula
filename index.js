@@ -7,7 +7,7 @@ const app = express()
 const port = process.env.PORT || 5000
 
 app.use(express.json())
-app.use(cors({credentials: true, origin: '*'}))
+app.use(cors({credentials: true, origin: 'https://trabalho-six-pink.vercel.app'}))
 
 
 // Connection in the DB
