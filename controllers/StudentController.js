@@ -124,7 +124,7 @@ module.exports = class StudentController {
         }
 
 
-        res.status(200).json({ studentId: student._id, token: createToken(student._id) })
+        res.status(200).json({ studentId: student._id, token: createToken(student._id), isStudent: student.isStudent})
 
 
     }
