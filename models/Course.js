@@ -8,9 +8,9 @@ const courseSchema = new Schema({
     name: { type: String, required: true },
     disciplines: [{
         nome: { type: String, required: true },
-        professor: { type: String, required: true },
-        alunos: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
         turmas: [{
+            professor: { type: String, required: true },
+            alunos: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
             horario: { type: String, required: true },
             turno: { type: String, required: true },
             dia: { type: String, required: true }

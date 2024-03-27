@@ -5,6 +5,7 @@ const router = express()
 
 // Student routes
 router.use('/student', require('./StudentRoutes'))
+router.use('/course', require('./CourseRoutes'))
 
 
 
