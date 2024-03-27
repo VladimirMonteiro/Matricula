@@ -25,11 +25,6 @@ module.exports = class StudentController {
             return
         }
 
-        if(!course || ''){
-            res.status(401).json({error: "O curso é obrigatório."})
-            return
-        }
-
 
 
         if (!password) {
@@ -45,6 +40,12 @@ module.exports = class StudentController {
             res.status(401).json({ error: "As senhas nâo conferem." })
             return
         }
+
+        if(!course || ''){
+            res.status(401).json({error: "O curso é obrigatório."})
+            return
+        }
+
 
         const checkIfUserExists = await Student.findOne({ email: email })
 
