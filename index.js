@@ -7,11 +7,13 @@ const app = express()
 const port = 5000
 
 
-app.use(cors({credentials: true, origin: '*'}))
+
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', '*');
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    app.use(cors())
     next();
 });
 app.use(express.json())
