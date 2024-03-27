@@ -107,7 +107,8 @@ module.exports = class StudentController {
             return
         }
 
-        const student = await Student.findOne({ email: email }).select('-password');
+        const student = await Student.findOne({ email: email }).select('+password');
+
 
         if (!student) {
             res.status(422).json({ error: "E-mail ou senha inválidos." })
