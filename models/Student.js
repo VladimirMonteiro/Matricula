@@ -10,7 +10,7 @@ const StudentSchema = new Schema({
     password: {type: String, required: true},
     course: {type: String, required: true},
     disciplines: {type: Array},
-    isStudent: {type: Boolean, default: true}
+    isStudent: {type: Boolean}
 }, {timestamps: true})
 
 
