@@ -1,5 +1,5 @@
 const Course = require('../models/Course')
-const Student = require('../models/Student')
+const Turma = require('../models/Turma')
 
 
 
@@ -9,29 +9,30 @@ module.exports = class CourseController {
     static async createCourse(req, res) {
 
        
-        const {name, ...disciplines} = req.body
-
+        const {name, disciplines, turmas} = req.body
+    
 
         if (!name) {
             res.status(401).json({ error: "O nome é obrigatório." })
             return
         }
+        if (!disciplines) {
+            res.status(401).json({ error: "A disciplina é  é obrigatória." })
+            return
+        }
+        if (!turmas) {
+            res.status(401).json({ error: "as turmas é obrigatório." })
+            return
+        }
+
+
 
 
         
         const course = {
             name,
-            disciplines: [{
-                name,
-                turmas: {
-                   disciplines,
-                    alunos,
-                    horario,
-                    turno,
-                    dia
-                }
-                
-            }]
+            disciplines,
+            turmas
         }
 
         try {

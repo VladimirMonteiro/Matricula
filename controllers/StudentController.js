@@ -1,4 +1,5 @@
 const Student = require('../models/Student')
+const Turma = require('../models/Turma')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
@@ -106,7 +107,7 @@ module.exports = class StudentController {
             return
         }
 
-        const student = await Student.findOne({ email: email })
+        const student = await Student.findOne({ email: email }).select('-password');
 
         if (!student) {
             res.status(422).json({ error: "E-mail ou senha inválidos." })
@@ -191,6 +192,67 @@ module.exports = class StudentController {
 
 
 
+    }
+
+
+    // xxx
+
+    static async createTurma (req, res) {
+
+
+        const {teacher, horario, turno, dia} = req.body
+        const {id} = req.params
+
+
+
+        const user = await Student.findById(id)
+
+        if(!user){
+            res.status(404).json({error: "Usúario não encotrado."})
+            return
+        }
+
+        if(user.isStudent === true){
+            res.status(401).json({error: "Usúario não autorizado."})
+            return
+        }
+
+
+        if(!teacher){
+            res.status(401).json({error: "O professor é obrigatório."})
+            return
+        }
+        if(!horario){
+            res.status(401).json({error: "O horário é obrigatório."})
+            return
+        }
+        if(!turno){
+            res.status(401).json({error: "O turno é obrigatório."})
+            return
+        }
+        if(!dia){
+            res.status(401).json({error: "O dia é obrigatório."})
+            return
+        }
+
+   
+
+        const turma = {
+            teacher,
+            turno,
+            horario,
+            dia
+        }
+
+        try {
+
+            const newTurma = await Turma.create(turma)
+            res.status(201).json(newTurma)
+            
+        } catch (error) {
+            res.status(500).json({error: error})
+            
+        }
     }
 
 

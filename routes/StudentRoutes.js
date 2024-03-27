@@ -8,10 +8,13 @@ const StudentController = require("../controllers/StudentController")
 const authGuard = require('../helpers/authGuard')
 
 
+
 router.post('/register', StudentController.register)
 router.post('/login', StudentController.login)
 router.get('/get-student-by-id', StudentController.getStudentById)
 router.put('/register-disciplines/:id', authGuard,StudentController.disciplineRegistration)
+
+router.post('/createTurma/:id', StudentController.createTurma)
 
 
 
