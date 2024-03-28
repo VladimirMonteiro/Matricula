@@ -245,7 +245,7 @@ module.exports = class StudentController {
         try {
 
             const newTurma = await Turma.create(turma)
-            res.status(201).json(newTurma)
+            res.status(201).json({newTurma, message: "Turma criada com sucesso!"})
             
         } catch (error) {
             res.status(500).json({error: error})
