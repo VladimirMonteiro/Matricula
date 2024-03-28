@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 const createToken = require("../helpers/createToken")
 
 
+
 module.exports = class StudentController {
 
 
@@ -42,8 +43,8 @@ module.exports = class StudentController {
             return
         }
 
-        if(!course || ''){
-            res.status(401).json({error: "O curso é obrigatório."})
+        if (!course || '') {
+            res.status(401).json({ error: "O curso é obrigatório." })
             return
         }
 
@@ -127,7 +128,7 @@ module.exports = class StudentController {
 
 
         //res.status(200).json({ studentId: student._id, token: createToken(student._id), isStudent: student.isStudent, course: student.course, disciplines: student.disciplines})
-        res.status(200).json({ student, token: createToken(student._id)})
+        res.status(200).json({ student, token: createToken(student._id) })
 
 
     }
@@ -153,38 +154,48 @@ module.exports = class StudentController {
 
     static async disciplineRegistration(req, res) {
 
-        const {id} = req.params
-        let {disciplines} = req.body
-
-        disciplines = [...disciplines]
+        const { id } = req.params
+        let { idTurma } = req.body
 
 
         const student = await Student.findById(id)
+        const turma = await Turma.findById(idTurma)
+     
 
-        if(!student){
-            res.status(404).json({error: "Estudante não encontrado."})
+
+        if (!student) {
+            res.status(404).json({ error: "Estudante não encontrado." })
+            return
+        }
+        if (!turma) {
+            res.status(404).json({ error: "Turma não encontrado." })
             return
         }
 
-        if(disciplines.length <= 0){
-            res.status(422).json({error: "É necessário se matricular no minímo em uma displina."})
-            return
+        for (const discipline of student.disciplines) {
+            if (discipline === turma.discipline) {
+                return res.status(422).json({ error: "Aluno já matriculado." });
+            }
         }
 
-        student.registration = disciplines
 
-    
+
+        student.disciplines = turma.discipline
+        turma.vagas -= 1
+
+
 
         try {
 
             const updatedStudent = await student.save()
+            await turma.save()
             res.status(200).json(updatedStudent)
 
 
-            
+
         } catch (error) {
-            res.status(401).json({error: error})
-            
+            res.status(401).json({ error: error })
+
         }
 
 
@@ -198,36 +209,36 @@ module.exports = class StudentController {
 
     // xxx
 
-    static async createTurma (req, res) {
+    static async createTurma(req, res) {
 
 
-        const {teacher, vagas, course ,horario, turno, dia, discipline} = req.body
-     
-      
+        const { teacher, vagas, course, horario, turno, dia, discipline } = req.body
 
-        if(!teacher){
-            res.status(401).json({error: "O professor é obrigatório."})
+
+
+        if (!teacher) {
+            res.status(401).json({ error: "O professor é obrigatório." })
             return
         }
 
-        if(!vagas){
-            res.status(401).json({error: "As Vagas são obrigatórias."})
+        if (!vagas) {
+            res.status(401).json({ error: "As Vagas são obrigatórias." })
             return
         }
-        if(!horario){
-            res.status(401).json({error: "O horário é obrigatório."})
+        if (!horario) {
+            res.status(401).json({ error: "O horário é obrigatório." })
             return
         }
-        if(!turno){
-            res.status(401).json({error: "O turno é obrigatório."})
+        if (!turno) {
+            res.status(401).json({ error: "O turno é obrigatório." })
             return
         }
-        if(!dia){
-            res.status(401).json({error: "O dia é obrigatório."})
+        if (!dia) {
+            res.status(401).json({ error: "O dia é obrigatório." })
             return
         }
 
-   
+
 
         const turma = {
             teacher,
@@ -242,11 +253,11 @@ module.exports = class StudentController {
         try {
 
             const newTurma = await Turma.create(turma)
-            res.status(201).json({newTurma, message: "Turma criada com sucesso!"})
-            
+            res.status(201).json({ newTurma, message: "Turma criada com sucesso!" })
+
         } catch (error) {
-            res.status(500).json({error: error})
-            
+            res.status(500).json({ error: error })
+
         }
     }
 
