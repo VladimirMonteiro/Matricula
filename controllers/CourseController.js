@@ -47,5 +47,28 @@ module.exports = class CourseController {
 
     }
 
+    static async getAllCoursesAndTurmas(req, res) {
+
+
+      try {
+        const turmas = await Turma.find()
+        const courses = await Course.find()
+
+        const data = {
+            turmas,
+            courses
+        }
+
+        res.status(200).json(data)
+
+        
+      } catch (error) {
+        res.status(500).json({error: error})
+        
+      }
+
+
+    }
+
 
 }

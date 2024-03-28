@@ -7,6 +7,7 @@ const authGuard = require('../helpers/authGuard')
 
 
 router.post('/create',authGuard, CourseController.createCourse)
+router.get('/getAll', CourseController.getAllCoursesAndTurmas)
 
 
 module.exports = router
