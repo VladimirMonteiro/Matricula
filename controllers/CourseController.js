@@ -20,25 +20,19 @@ module.exports = class CourseController {
             res.status(401).json({ error: "A disciplina é  é obrigatória." })
             return
         }
-        if (!turmas) {
-            res.status(401).json({ error: "as turmas é obrigatório." })
-            return
-        }
-
-
-
+       
 
         
         const course = {
             name,
             disciplines,
-            turmas
+        
         }
 
         try {
 
             const newCourse = await Course.create(course)
-            res.status(201).json(newCourse)
+            res.status(201).json({newCourse, message: "Curso criado com sucesso!"})
 
 
             
