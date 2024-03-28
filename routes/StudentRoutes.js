@@ -14,7 +14,7 @@ router.post('/login', StudentController.login)
 router.get('/get-student-by-id', StudentController.getStudentById)
 router.put('/register-disciplines/:id', authGuard,StudentController.disciplineRegistration)
 
-router.post('/createTurma', StudentController.createTurma)
+router.post('/createTurma',authGuard, StudentController.createTurma)
 
 
 

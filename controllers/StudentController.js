@@ -201,7 +201,7 @@ module.exports = class StudentController {
     static async createTurma (req, res) {
 
 
-        const {teacher, horario, turno, dia} = req.body
+        const {teacher, horario, turno, dia, course} = req.body
      
         const user = await Student.findById(id)
 
@@ -238,6 +238,7 @@ module.exports = class StudentController {
         const turma = {
             teacher,
             turno,
+            course,
             horario,
             dia
         }
