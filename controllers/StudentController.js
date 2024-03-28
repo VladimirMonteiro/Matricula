@@ -202,10 +202,7 @@ module.exports = class StudentController {
 
 
         const {teacher, horario, turno, dia} = req.body
-        const {id} = req.params
-
-
-
+     
         const user = await Student.findById(id)
 
         if(!user){
