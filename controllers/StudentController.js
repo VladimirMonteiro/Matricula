@@ -233,6 +233,7 @@ module.exports = class StudentController {
             teacher,
             turno,
             course,
+            vagas,
             horario,
             dia
         }
