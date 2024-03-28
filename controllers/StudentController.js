@@ -201,7 +201,7 @@ module.exports = class StudentController {
     static async createTurma (req, res) {
 
 
-        const {teacher, vagas, course ,horario, turno, dia} = req.body
+        const {teacher, vagas, course ,horario, turno, dia, discipline} = req.body
      
       
 
@@ -232,6 +232,7 @@ module.exports = class StudentController {
         const turma = {
             teacher,
             turno,
+            discipline,
             course,
             vagas,
             horario,
