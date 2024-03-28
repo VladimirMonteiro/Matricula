@@ -201,23 +201,17 @@ module.exports = class StudentController {
     static async createTurma (req, res) {
 
 
-        const {teacher, horario, turno, dia, course} = req.body
+        const {teacher, vagas, course ,horario, turno, dia} = req.body
      
-        const user = await Student.findById(id)
-
-        if(!user){
-            res.status(404).json({error: "Usúario não encotrado."})
-            return
-        }
-
-        if(user.isStudent === true){
-            res.status(401).json({error: "Usúario não autorizado."})
-            return
-        }
-
+      
 
         if(!teacher){
             res.status(401).json({error: "O professor é obrigatório."})
+            return
+        }
+
+        if(!vagas){
+            res.status(401).json({error: "As Vagas são obrigatórias."})
             return
         }
         if(!horario){
