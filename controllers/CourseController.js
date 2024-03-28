@@ -9,7 +9,7 @@ module.exports = class CourseController {
     static async createCourse(req, res) {
 
        
-        const {name, disciplines, turmas} = req.body
+        const {name, disciplines} = req.body
     
 
         if (!name) {
