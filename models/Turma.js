@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const {Schema} = require('mongoose')
+const {Schema, ObjectId} = require('mongoose')
 
 
 
@@ -7,7 +7,7 @@ const {Schema} = require('mongoose')
 
 const turmaSchema = new Schema({
     teacher: {type: String, required: true},
-    students: {type: Object},
+    students: {type: ObjectId},
     discipline: {type: String, required: true},
     vagas: {type: Number, required: true},
     course: {type: String, required: true},

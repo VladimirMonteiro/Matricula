@@ -182,6 +182,7 @@ module.exports = class StudentController {
 
         student.disciplines.push(turma.discipline)
         turma.vagas -= 1
+        turma.students.push(id)
 
 
 
