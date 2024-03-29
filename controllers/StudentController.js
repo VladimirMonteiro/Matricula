@@ -180,7 +180,7 @@ module.exports = class StudentController {
 
 
 
-        student.disciplines = turma.discipline
+        student.disciplines.push(turma.discipline)
         turma.vagas -= 1
 
 
