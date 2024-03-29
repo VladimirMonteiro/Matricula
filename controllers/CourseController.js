@@ -1,5 +1,6 @@
 const Course = require('../models/Course')
 const Turma = require('../models/Turma')
+const Student = require('../models/Student')
 
 
 
@@ -53,10 +54,12 @@ module.exports = class CourseController {
       try {
         const turmas = await Turma.find()
         const courses = await Course.find()
+        const students = await Student.find()
 
         const data = {
             turmas,
-            courses
+            courses,
+            students
         }
 
         res.status(200).json(data)
