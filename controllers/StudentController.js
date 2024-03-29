@@ -189,7 +189,7 @@ module.exports = class StudentController {
 
             const updatedStudent = await student.save()
             await turma.save()
-            res.status(200).json(updatedStudent)
+            res.status(200).json({message: "Aluno matriculado com sucesso!"})
 
 
 
